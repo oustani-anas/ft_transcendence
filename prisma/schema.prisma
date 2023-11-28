@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum GameState {
+  Win
+  Lose
+  Draw
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement()) // PR key
+
+  username String @unique()
+  email    String @unique()
+
+  fullname String?
+  password String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model profile {
+  userid String
+  id     String @id @default(uuid())
+  name   String
+  ddd    String
+}
+
+model chat {
+  id      String   @id @default(uuid())
+  message String
+  time    DateTime
+}
+
+model game {
+  id      String    @id @default(uuid())
+  point   Int
+  players Int
+  state   GameState
+}

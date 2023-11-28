@@ -5,7 +5,7 @@ import { AuthModule } from './auth/auth.module';
 
 
 @Module({
-  imports: [AuthModule,PrismaModule],
+  imports: [AuthModule, PrismaModule],
   controllers: [SampleController],
   providers: [],
 })
